@@ -1,73 +1,31 @@
-# React + TypeScript + Vite
+# Babax — Multiplication Tables
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A bilingual (ES/EN) practice and quiz app for multiplication tables 1–12, built for kids. Runs entirely in the browser — no backend, no account required.
 
-Currently, two official plugins are available:
+**Live:** https://billy-arredondo.github.io/babax-multiplication/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Admin mode** — choose which tables to practice (1–12), number of questions (presets or custom), answer type (4-choice or numeric keypad), and an optional countdown timer with Easy / Medium / Hard difficulty.
+- **Player mode** — Start, Pause, Resume, and Stop controls; `mm:ss.d` timer display; progress bar; immediate correct/incorrect feedback with animations.
+- **Results** — accuracy %, time used, and a full breakdown of every missed question (your answer vs. correct answer). Confetti on ≥ 80%.
+- **History** — last 50 sessions persisted in LocalStorage.
+- **Smart distractors** — wrong options in 4-choice mode are generated from adjacent-table products and near-digit errors, not random numbers.
+- **Animated favicon** — star icon pulses and rotates every 15 s; yellow by default, orange-red during a quiz.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 18 · TypeScript · Vite · Tailwind CSS v4 · Zustand v5 · Vitest
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # http://localhost:5173
+npm test          # run test suite
+npm run build     # production build → dist/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Pushes to `main` automatically build and deploy to GitHub Pages via `.github/workflows/deploy.yml`. Tests must pass for the deploy to proceed.
